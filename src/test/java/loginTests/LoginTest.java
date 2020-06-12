@@ -12,9 +12,6 @@ public class LoginTest extends TestBase {
 
     private LoginPage loginPage;
     private LoginFlows loginFlows;
-    private String url = "http://blazedemo.com/login";
-    private String email = "teste@teste";
-    private String password = "123456";
 
     public LoginTest(){
         loginPage = new LoginPage();
@@ -23,16 +20,16 @@ public class LoginTest extends TestBase {
 
     @Test
     public void loginStepByStep(){
-        loginPage.navigateToUrl(url);
-        loginPage.setEmail(email);
-        loginPage.setPassword(password);
+        loginPage.navigateToUrl(PROP.getProperty("url"));
+        loginPage.setEmail(PROP.getProperty("email"));
+        loginPage.setPassword(PROP.getProperty("password"));
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.messagemLoggedSuccess());
     }
 
     @Test
     public void login(){
-        loginFlows.login(url, email, password);
+        loginFlows.login(PROP.getProperty("url"), PROP.getProperty("email"), PROP.getProperty("password"));
     }
 
 }

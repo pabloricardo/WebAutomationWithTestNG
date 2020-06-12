@@ -7,8 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.TestException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 public class DriverConfig {
 
@@ -33,6 +38,19 @@ public class DriverConfig {
     public static void quitDriver(){
         DRIVER.quit();
         DRIVER = null;
+    }
+
+    public static Properties setProperties() {
+        Properties prop = new Properties();
+
+        try{
+            InputStream input = new FileInputStream("src/main/java/config/STANDARD.config.properties");
+            prop.load(input);
+        }catch (IOException e){
+            throw new TestException(e.getMessage(), e.getCause());
+        }
+
+        return prop;
     }
 
 }
